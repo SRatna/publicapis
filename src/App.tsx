@@ -1,6 +1,7 @@
 import { Layout, theme } from 'antd';
 const { Header, Content, Footer } = Layout;
 import './App.css';
+import PublicApisTable from './component/PublicApisTable';
 
 const App = () => {
   const {
@@ -24,7 +25,7 @@ const App = () => {
             background: colorBgContainer,
           }}
         >
-          Content
+          <PublicApisTable />
         </div>
       </Content>
       <Footer
