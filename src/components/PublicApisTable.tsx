@@ -52,7 +52,7 @@ const PublicApisTable = () => {
       <Title style={{ marginTop: 0 }} level={4}>Public APIs</Title>
       {!error ?
         <Table
-          loading={isLoading}
+          loading={isLoading && { tip: 'Loading...' }}
           columns={columns}
           rowKey={({ API, Link }) => `${API}-${Link}`}
           dataSource={data?.entries}
