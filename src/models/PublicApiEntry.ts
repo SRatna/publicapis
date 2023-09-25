@@ -1,8 +1,9 @@
 export interface PublicApiEntry {
-  title: string;
-  description: string;
-  auth?: string;
-  https: boolean;
-  cors: string;
-  category: string;
+  API: string;
+  Description: string;
+  Auth: string;
+  HTTPS: boolean;
+  Cors: string;
+  Category: string;
+  Link: string;
 }

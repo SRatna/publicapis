@@ -1,50 +1,63 @@
 import { Table, Typography } from 'antd';
 import { PublicApiEntry } from '../models/PublicApiEntry';
+import useSWR, { Fetcher } from 'swr'
 
 const { Title } = Typography;
 
 const columns = [
   {
     title: 'Title',
-    dataIndex: 'title',
+    dataIndex: 'API',
   },
   {
     title: 'Description',
-    dataIndex: 'description',
+    dataIndex: 'Description',
   },
   {
     title: 'Auth',
-    dataIndex: 'auth',
+    dataIndex: 'Auth',
   },
   {
     title: 'HTTPS',
-    dataIndex: 'https',
+    dataIndex: 'HTTPS',
+    render: (https: boolean) => https ? 'Yes' : 'No'
   },
   {
     title: 'CORS',
-    dataIndex: 'cors',
+    dataIndex: 'Cors',
   },
   {
     title: 'Category',
-    dataIndex: 'category',
+    dataIndex: 'Category',
+  },
+  {
+    title: 'Link',
+    dataIndex: 'Link',
+    render: (link: string) => <a href={link}>{link}</a>
   },
 ];
 
+type Response = {
+  count: number;
+  entries: PublicApiEntry[]
+}
+
+const fetcher: Fetcher<Response, string> = (url: string) => fetch(url).then((res) => res.json());
+
 const PublicApisTable = () => {
-  const entries: PublicApiEntry[] = [
-    {
-      title: 'test',
-      description: 'test d',
-      auth: 'test a',
-      https: false,
-      cors: 'yes',
-      category: 'test c',
-    }
-  ]
+  const { data, error, isLoading } = useSWR('https://api.publicapis.org/entries', fetcher)
+
   return (
     <>
       <Title style={{ marginTop: 0 }} level={4}>Public APIs</Title>
-      <Table columns={columns} rowKey={'title'} dataSource={entries} />
+      {!error ?
+        <Table
+          loading={isLoading}
+          columns={columns}
+          rowKey={({ API, Link }) => `${API}-${Link}`}
+          dataSource={data?.entries}
+        /> : <>Something went wrong!</>
+      }
     </>
   )
 }
