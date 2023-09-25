@@ -1,7 +1,7 @@
 import { Layout, theme } from 'antd';
 const { Header, Content, Footer } = Layout;
 import './App.css';
-import PublicApisTable from './component/PublicApisTable';
+import PublicApisTable from './components/PublicApisTable';
 
 const App = () => {
   const {
