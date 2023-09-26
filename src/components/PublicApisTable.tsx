@@ -50,14 +50,16 @@ const PublicApisTable = () => {
   return (
     <>
       <Title style={{ marginTop: 0 }} level={4}>Public APIs</Title>
-      {!error ?
+      {!error ? (
         <Table
           loading={isLoading && { tip: 'Loading...' }}
           columns={columns}
           rowKey={({ API, Link }) => `${API}-${Link}`}
           dataSource={data?.entries}
-        /> : <>Something went wrong!</>
-      }
+        />
+      ) : (
+        <>Something went wrong!</>
+      )}
     </>
   )
 }
