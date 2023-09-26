@@ -58,7 +58,7 @@ const PublicApisTable = () => {
           dataSource={data?.entries}
         />
       ) : (
-        <>Something went wrong!</>
+        <>Oh no, something went wrong!</>
       )}
     </>
   )
