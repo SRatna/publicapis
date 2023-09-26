@@ -18,7 +18,7 @@ describe('PublicApisTable', () => {
     });
 
     expect(screen.getByText('Public APIs')).toBeInTheDocument();
-    expect(screen.getByText('Something went wrong!')).toBeInTheDocument();
+    expect(screen.getByText('Oh no, something went wrong!')).toBeInTheDocument();
 
     // Ensure that fetch was called with the correct URL
     expect(fetch).toHaveBeenCalledWith('https://api.publicapis.org/entries');
