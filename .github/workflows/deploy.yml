@@ -1,0 +1,33 @@
+name: Test and Deploy to Netlify
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14 # Adjust the Node.js version as needed
+
+      - name: Install dependencies
+        run: npm install # Use npm or yarn based on your project
+
+      - name: Run tests
+        run: npm test # Replace with the command to run your tests
+
+      - name: Deploy to Netlify
+        if: success() # Only deploy if tests pass
+        run: |
+          npm install -g netlify-cli
+          netlify login -a "$NETLIFY_AUTH_TOKEN"
+          netlify deploy --prod
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
